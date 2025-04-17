@@ -1,12 +1,13 @@
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Main start");
+    public static void main(String[] args) {
 
-        MyThread thread1 = new MyThread();
-        Thread thread2 = new Thread(new MyRunnable());
+        Task task2 = new Task(2);
+        Task task3 = new Task(3);
 
-        thread1.start();
-        thread2.start();
+        task2.setDaemon(true);
+        task3.setDaemon(true);
+        task2.start();
+        task3.start();
 
         try {
             Thread.sleep(3000);
@@ -14,7 +15,8 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        System.out.println("Main finish");
-
+        System.out.println("stop");
     }
-}
+    }
+
+
