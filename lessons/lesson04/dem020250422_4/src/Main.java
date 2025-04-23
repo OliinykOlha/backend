@@ -21,9 +21,9 @@ public class Main {
     public static synchronized void transfer(Account from, Account to, double amount) {
         synchronized (from) {
             System.out.println("account" + from + " is locked " + Thread.currentThread().getName());
-            from.withdraw(amount);
             synchronized (to) {
                 System.out.println("account" + to + " is locked" + Thread.currentThread().getName());
+                from.withdraw(amount);
                 to.deposit(amount);
             }
             System.out.println("account" + to + " is unlocked" + Thread.currentThread().getName());
