@@ -9,7 +9,7 @@ public class LatencyMonitor {
 
         while (true) {
             int currentMin = minLatency.get();
-            if(currentMin >= newLatency) {
+            if( newLatency >= currentMin) {
                 return;
             }
             if(minLatency.compareAndSet(currentMin, newLatency)) {
