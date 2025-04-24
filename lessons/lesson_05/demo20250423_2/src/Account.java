@@ -17,10 +17,12 @@ public class Account {
         balance += amount;
     }
 
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
         if (getBalance() >= amount) {
             balance -= amount;
+            return true;
         }
+        return false;
     }
 
     @Override
