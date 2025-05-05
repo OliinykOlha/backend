@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @ToString
-public class Result {
-    private List<DataDto> text;
+public class DataDto {
+    private String data;
 }
+
+

@@ -13,3 +13,5 @@ import lombok.ToString;
 public class ResultDto {
     private Result result;
 }
+
+

@@ -23,7 +23,7 @@ public class Main {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", token);
 
-        URI uri = UriComponentsBuilder.fromHttpUrl(url)
+        URI uri = UriComponentsBuilder.fromUriString(url)
                 .queryParam("image_url", imgUrl)
                 .build()
                 .toUri();
@@ -33,7 +33,7 @@ public class Main {
         ResponseEntity<ResultDto> response = restTemplate.exchange(request, ResultDto.class);
 
 
-       List<DataDto> textItems =  response.getBody().getResult().getText();
+        List<DataDto> textItems =  response.getBody().getResult().getText();
 
         String joinedText = textItems.stream()
                 .map(DataDto::getData)
@@ -43,8 +43,7 @@ public class Main {
 
 
 
-
-
-
     }
+
+
 }
