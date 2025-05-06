@@ -10,6 +10,7 @@ public class ResultDto {
     private double result;
 
     public double getResult() {
+
         return result;
     }
 }
