@@ -5,8 +5,8 @@ import de.ait.tasksapi.Model.Task;
 import java.util.List;
 
 public interface TaskRepository {
-    public List<Task> findAll();
-    public Task findById(Long id);
-    public Task save(Task task);
-    public void deleteById(Long id);
+     List<Task> findAll();
+     Task findById(Long id);
+     Task save(Task task);
+     Task delete(Long id);
 }
