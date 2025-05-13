@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @RestController
 public class ProgrammerController {
     private final ProgrammerRepository repository;
 
-
+    public ProgrammerController(ProgrammerRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/programmers")
     public List<Programmer> getProgrammers() {

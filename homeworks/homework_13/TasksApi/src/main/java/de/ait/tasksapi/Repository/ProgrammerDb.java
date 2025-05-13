@@ -2,28 +2,32 @@ package de.ait.tasksapi.Repository;
 
 import de.ait.tasksapi.Model.Programmer;
 import de.ait.tasksapi.Model.Task;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Repository
-@AllArgsConstructor
+//@AllArgsConstructor
+
 public class ProgrammerDb implements ProgrammerRepository {
     private TaskRepository taskRepository;
     private static Long lastID = 3L;
     private static HashMap<Long, Programmer> map = new HashMap<>();
-     {
+
+    public ProgrammerDb(TaskRepository taskRepository) {
         map.put(1L, new Programmer(1L, "Jack"));
         map.put(2L, new Programmer(2L, "Nick"));
         map.put(3L, new Programmer(3L, "John"));
-       addTaskToProgrammer(1L, 1L);
-       addTaskToProgrammer(1L, 2L);
-       addTaskToProgrammer(2L, 3L);
+        this.taskRepository = taskRepository;
+        addTaskToProgrammer(1L, 1L);
+        addTaskToProgrammer(1L, 2L);
+        addTaskToProgrammer(2L, 3L);
     }
+
+
 
     @Override
     public List<Programmer> findAll() {

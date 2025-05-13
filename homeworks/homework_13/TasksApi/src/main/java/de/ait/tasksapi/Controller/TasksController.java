@@ -4,14 +4,23 @@ import de.ait.tasksapi.Model.Task;
 import de.ait.tasksapi.Repository.TaskRepository;
 import de.ait.tasksapi.Repository.TasksDb;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 @AllArgsConstructor
 @RestController
 public class TasksController {
    private TaskRepository repository;
+   private Scanner scanner;
+
+    @Autowired
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
 
     @GetMapping("/tasks")
     public List<Task> getTasks() {
