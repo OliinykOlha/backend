@@ -5,6 +5,9 @@ import de.ait.tasksapi.Model.Programmer;
 import de.ait.tasksapi.Model.Task;
 import de.ait.tasksapi.Repository.ProgrammerDb;
 import de.ait.tasksapi.Repository.ProgrammerRepository;
+import de.ait.tasksapi.dto.ProgrammerRequestDto;
+import de.ait.tasksapi.dto.ProgrammerResponseDto;
+import de.ait.tasksapi.service.ProgrammerService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +16,14 @@ import java.util.List;
 
 //@AllArgsConstructor
 @RestController
+@RequiredArgsConstructor
 public class ProgrammerController {
     private final ProgrammerRepository repository;
+    private final ProgrammerService service;
 
-    public ProgrammerController(ProgrammerRepository repository) {
-        this.repository = repository;
-    }
+//    public ProgrammerController(ProgrammerRepository repository) {
+//        this.repository = repository;
+//    }
 
     @GetMapping("/programmers")
     public List<Programmer> getProgrammers() {
@@ -35,9 +40,10 @@ public class ProgrammerController {
        return repository.findTasksByProgrammerId(id);
    }
 
+
    @PutMapping("/programmers")
-   public Programmer createProgrammer(@RequestBody Programmer programmer) {
-        return repository.save(programmer);
+   public ProgrammerResponseDto createProgrammer(@RequestBody ProgrammerRequestDto dto) {
+        return service.addProgrammer(dto);
    }
 
    @PutMapping("/programmers/{programmerId}/tasks/{taskId}")
