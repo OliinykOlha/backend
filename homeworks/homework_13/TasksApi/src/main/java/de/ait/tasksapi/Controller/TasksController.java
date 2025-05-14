@@ -18,34 +18,27 @@ import java.util.Scanner;
 @RestController
 
 public class TasksController {
-   private TaskRepository repository;
    private final TaskService service;
-   private Scanner scanner;
 
-    @Autowired
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-
+   
     @GetMapping("/tasks")
-    public List<Task> getTasks() {
-        return repository.findAll();
+    public List<TaskResponseDto> getTasks() {
+        return service.addAllTasks();
     }
 
     @GetMapping("/tasks/{id}")
-    public Task getTaskById(@PathVariable("id") Long taskId) {
-        return repository.findById(taskId);
+    public TaskResponseDto getTaskById(@PathVariable("id") Long taskId) {
+        return service.findTaskById(taskId);
     }
 
     @PostMapping("/tasks")
     public TaskResponseDto addTask(@RequestBody TaskRequestDto dto) {
-       return service.addTask(dto);
+        return service.addTask(dto);
     }
 
     @DeleteMapping("/tasks/{id}")
-    public Task deleteTask(@PathVariable("id") Long id) {
-        return repository.delete(id);
+    public TaskResponseDto deleteTask(@PathVariable("id") Long id) {
+        return service.deleteTask(id);
     }
 
 

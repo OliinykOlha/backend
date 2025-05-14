@@ -26,8 +26,8 @@ public class ProgrammerController {
 //    }
 
     @GetMapping("/programmers")
-    public List<Programmer> getProgrammers() {
-        return repository.findAll();
+    public List<ProgrammerResponseDto> getProgrammers() {
+        return service.getAll();
     }
 
     @GetMapping("/programmers/{id}")
