@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface TaskService {
-    List<TaskResponseDto> addAllTasks();
+    List<TaskResponseDto> findAllTasks();
     TaskResponseDto findTaskById(Long id);
     TaskResponseDto addTask(TaskRequestDto dto);
     TaskResponseDto deleteTask(Long id);

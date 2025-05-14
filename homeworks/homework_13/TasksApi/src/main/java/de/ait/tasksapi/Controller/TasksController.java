@@ -9,6 +9,9 @@ import de.ait.tasksapi.service.TaskService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,17 +25,25 @@ public class TasksController {
 
    
     @GetMapping("/tasks")
-    public List<TaskResponseDto> getTasks() {
-        return service.addAllTasks();
+    public ResponseEntity <List<TaskResponseDto>> getTasks() {
+//        return ResponseEntity.ok(service.findAllTasks());
+        List<TaskResponseDto> allTasks = service.findAllTasks();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Task-Size", String.valueOf(allTasks.size()));
+        return new ResponseEntity<>(allTasks, headers, HttpStatus.OK);
     }
 
     @GetMapping("/tasks/{id}")
-    public TaskResponseDto getTaskById(@PathVariable("id") Long taskId) {
-        return service.findTaskById(taskId);
+    public ResponseEntity <TaskResponseDto> getTaskById(@PathVariable("id") Long taskId) {
+        try {
+            return ResponseEntity.ok(service.findTaskById(taskId));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/tasks")
-    public TaskResponseDto addTask(@RequestBody TaskRequestDto dto) {
+    public  TaskResponseDto addTask(@RequestBody TaskRequestDto dto) {
         return service.addTask(dto);
     }
 

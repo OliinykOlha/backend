@@ -4,6 +4,7 @@ import de.ait.tasksapi.Model.Task;
 import de.ait.tasksapi.Repository.TaskRepository;
 import de.ait.tasksapi.dto.TaskRequestDto;
 import de.ait.tasksapi.dto.TaskResponseDto;
+import de.ait.tasksapi.mappers.TaskMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService{
     private final TaskRepository repository;
+    private final TaskMapper mapper;
+
+//    @Override
+//    public List<TaskResponseDto> findAllTasks() {
+//        List<Task> taskList = repository.findAll();
+//       return taskList.stream().map(TaskServiceImpl::toTaskResponseDto).toList();
+//    }
+
+//    @Override
+//    public List<TaskResponseDto> findAllTasks() {
+//        List<Task> taskList = repository.findAll();
+//        return taskList.stream().map(t->mapper.toResponseDto(t)).toList();
+//    }
 
     @Override
-    public List<TaskResponseDto> addAllTasks() {
-        List<Task> taskList = repository.findAll();
-       return taskList.stream().map(TaskServiceImpl::toTaskResponseDto).toList();
+    public List<TaskResponseDto> findAllTasks() {
+        return mapper.toResponseDtoList(repository.findAll());
     }
 
     @Override
