@@ -30,6 +30,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<TaskResponseDto> findAllTasks() {
+
         return mapper.toResponseDtoList(repository.findAll());
     }
 
