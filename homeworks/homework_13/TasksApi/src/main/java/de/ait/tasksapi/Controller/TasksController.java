@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,13 +45,18 @@ public class TasksController {
     }
 
     @PostMapping("/tasks")
-    public  TaskResponseDto addTask(@RequestBody TaskRequestDto dto) {
-        return service.addTask(dto);
+    public ResponseEntity <TaskResponseDto> addTask(@RequestBody TaskRequestDto dto) {
+        TaskResponseDto saved = service.addTask(dto);
+        try {
+            return ResponseEntity.created(new URI("http:localhost/tasks/ " + saved.getId())).body(saved);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping("/tasks/{id}")
-    public TaskResponseDto deleteTask(@PathVariable("id") Long id) {
-        return service.deleteTask(id);
+    public  ResponseEntity<TaskResponseDto> deleteTask(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.deleteTask(id));
     }
 
 

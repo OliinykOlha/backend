@@ -46,7 +46,8 @@ public class TasksDb implements TaskRepository {
 
     @Override
     public Task delete(Long id) {
-        return tasksMap.remove(id);
+        Task task = tasksMap.remove(id);
+        return task;
     }
 
 
