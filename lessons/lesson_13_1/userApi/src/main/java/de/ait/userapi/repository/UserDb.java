@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 
-@Repository
-public class UserDb implements UserRepository {
+//@Repository
+public class UserDb  { // implements UserRepositor
     private  Long lastId = 6L;
     private static HashMap<Long, User> map = new HashMap<>();
     static {
@@ -20,14 +20,14 @@ public class UserDb implements UserRepository {
     }
 
     public List<User> findAll() {
-       return  map.values().stream().toList();
+        return  map.values().stream().toList();
     }
 
     public User findById(Long id) {
         return map.get(id);
     }
 
-    @Override
+
     public User save(User user) {
          user.setId(++lastId);
          map.put(user.getId(), user);
