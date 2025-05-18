@@ -2,11 +2,7 @@ package de.ait.userapi.controller;
 
 import de.ait.userapi.dto.UserRequestDto;
 import de.ait.userapi.dto.UserResponseDto;
-import de.ait.userapi.model.User;
-import de.ait.userapi.repository.UserDb;
-import de.ait.userapi.repository.UserRepository;
 import de.ait.userapi.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

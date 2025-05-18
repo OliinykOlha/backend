@@ -3,48 +3,41 @@ package de.ait.userapi.service;
 
 import de.ait.userapi.dto.UserRequestDto;
 import de.ait.userapi.dto.UserResponseDto;
+import de.ait.userapi.mappers.UserMapper;
 import de.ait.userapi.model.User;
 import de.ait.userapi.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+    private final UserMapper mapper;
 
     @Override
     public List<UserResponseDto> getAllUsers() {
-        return repository.findAll()
-                .stream()
-                .map(UserServiceImpl::toResponseDto)
-                .toList();
+        return mapper.toResponseDtoList(repository.findAll());
     }
 
     @Override
     public UserResponseDto getUserById(Long id) {
-        User user = repository.findById(id).get();
-        if (user != null) {
-         return toResponseDto(user);
-        } else {
-            throw new RuntimeException("User " + id + " not found");
-        }
+        Optional<User> user = repository.findById(id);
+       return mapper.toResponseDto(user.orElse(null));
+
     }
 
     @Override
     public UserResponseDto addUser(UserRequestDto dto) {
-       User user = new User(null, dto.getName(), dto.getEmail(), dto.getPassword());
+       User user = mapper.fromRequestDto(dto);
       User savedUser = repository.save(user);
-      if(savedUser!=null) {
-          return toResponseDto(savedUser);
-      } throw new RuntimeException("Error");
+      return mapper.toResponseDto(savedUser);
+
     }
 
-    private static UserResponseDto toResponseDto(User user) {
-        return new UserResponseDto(user.getId(), user.getName(), user.getEmail());
-    }
+
 }
 
