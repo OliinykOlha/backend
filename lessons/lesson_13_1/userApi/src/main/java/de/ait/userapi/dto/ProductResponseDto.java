@@ -14,4 +14,5 @@ public class ProductResponseDto {
     Long id;
     private String title;
     private BigDecimal price;
+    private CategoryResponseDto category;
 }

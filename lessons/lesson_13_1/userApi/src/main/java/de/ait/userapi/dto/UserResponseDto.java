@@ -1,16 +1,16 @@
 package de.ait.userapi.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import de.ait.userapi.model.Address;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 public class UserResponseDto {
     private Long id;
     private String name;
     private String email;
+    private Address address;
 }

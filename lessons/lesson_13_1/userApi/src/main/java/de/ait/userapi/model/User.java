@@ -7,11 +7,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "t_user")
 public class User {
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,6 +19,8 @@ public class User {
     private String name;
     private String email;
     private String password;
+    @Embedded
+    private Address address;
 
 
 }
