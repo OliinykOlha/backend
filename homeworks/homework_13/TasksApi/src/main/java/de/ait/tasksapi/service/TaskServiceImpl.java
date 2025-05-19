@@ -38,7 +38,7 @@ public class TaskServiceImpl implements TaskService{
     public TaskResponseDto findTaskById(Long id) {
         Task task = repository.findById(id);
         if (task != null) {
-            return toTaskResponseDto(task);
+            return mapper.toResponseDto(task);
         } else {
             throw new RuntimeException("Task with id" + id + " not found");
         }
@@ -49,7 +49,7 @@ public class TaskServiceImpl implements TaskService{
         Task task = new Task(null, dto.getDescription(), dto.getPriority());
         Task saved = repository.save(task);
         if(saved != null) {
-            return toTaskResponseDto(saved);
+            return mapper.toResponseDto(saved);
         } else {
             throw new RuntimeException("Error");
         }
@@ -58,14 +58,14 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public TaskResponseDto deleteTask(Long id) {
        Task task = repository.delete(id);
-       if(task.getId() != null) {
-           return toTaskResponseDto(task);
+       if(task != null) {
+           return mapper.toResponseDto(task);
        } else {
            throw new RuntimeException("Id " + id + " not exist");
        }
     }
 
-    public static TaskResponseDto toTaskResponseDto(Task task) {
-        return new TaskResponseDto(task.getId(), task.getDescription(), task.getPriority());
-    }
+//    public static TaskResponseDto toTaskResponseDto(Task task) {
+//        return new TaskResponseDto(task.getId(), task.getDescription(), task.getPriority());
+//    }
 }
