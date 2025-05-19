@@ -2,10 +2,7 @@ package de.ait.userapi.controller;
 
 import de.ait.userapi.dto.CategoryRequestDto;
 import de.ait.userapi.dto.CategoryResponseDto;
-import de.ait.userapi.dto.ProductRequestDto;
-import de.ait.userapi.dto.ProductResponseDto;
 import de.ait.userapi.service.CategoryService;
-import de.ait.userapi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
